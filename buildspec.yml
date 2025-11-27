@@ -1,17 +1,14 @@
 version: 0.2
- 
+
 phases:
- pre_build:
-   commands:
-     - echo Logging in to Amazon ECR...
-     - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin accountid.dkr.ecr.ap-south-1.amazonaws.com/node-app
- build:
-   commands:
-     - echo Build started on `date`
-     - echo Building the Docker image...
-     - docker build -t node-app:latest .
-     - docker tag node-app:latest accountid.dkr.ecr.ap-south-1.amazonaws.com/node-app:latest
- post_build:
-   commands:
-     - echo Pushing the Docker image to ECR...
-     - docker push accountid.dkr.ecr.ap-south-1.amazonaws.com/node-app:latest
+  install:
+    commands:
+      - echo "Nothing to install"
+
+  build:
+    commands:
+      - echo "No build required. Preparing artifact for CodeDeploy."
+
+artifacts:
+  files:
+    - '**/*'

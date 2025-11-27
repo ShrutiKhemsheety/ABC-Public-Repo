@@ -1,10 +1,8 @@
 #!/bin/bash
-echo "Starting the service..."
-# Add your start commands here, e.g., starting a server or app
-# Example: starting a Node.js server
-# node server.js
+cd /home/ec2-user/staticwebsite
 
-# Or starting a service
-# sudo systemctl start apache2
+docker stop staticweb || true
+docker rm staticweb || true
 
-echo "Service started."
+docker build -t staticweb .
+docker run -d --name staticweb -p 80:80 staticweb
